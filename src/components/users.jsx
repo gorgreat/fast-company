@@ -15,8 +15,8 @@ const Users = () => {
 
     const renderPhrase = (number) => {
         return number === 0 ? 
-            <h1> <span className='badge bg-danger'>никто не тусанет с тобой, дружище </span></h1> : 
-            <h1> <span className='badge bg-primary'>{number} {declensions(number,['человек', 'человека', 'человек'])} тусанет с тобой сегодня </span></h1>
+        'никто не тусанет с тобой, дружище' :
+        number + ' ' + declensions(number, ['человек', 'человека', 'человек']) + ' ' + declensions(number, ['тусанет', 'тусанут', 'тусанет']) + ' с тобой сегодня' 
     }
 
     const renderQualities = (qualities) => {    
@@ -43,22 +43,25 @@ const Users = () => {
     }
 
     return <>
-        {renderPhrase(users.length)}
-        <table className="table">
-            <thead>
-                <tr>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Качества</th>
-                    <th scope="col">Профессия</th>
-                    <th scope="col">Встретился, раз</th>
-                    <th scope="col">Оценка</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                {renderTable()}
-            </tbody>
-        </table>
+        <h1><span className={'badge ' + (users.length > 0 ? 'bg-primary' : 'bg-danger')}>{renderPhrase(users.length)}</span></h1>
+
+        {users.length > 0 ?  
+            <table className="table"> 
+                <thead>
+                    <tr>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Качества</th>
+                        <th scope="col">Профессия</th>
+                        <th scope="col">Встретился, раз</th>
+                        <th scope="col">Оценка</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>      
+                <tbody>
+                    {renderTable()}
+                </tbody>                      
+            </table>            
+        : ''}
     </>
 }
 
